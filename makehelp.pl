@@ -1,4 +1,4 @@
-#!/bin/perl
+#!/usr/bin/perl
 # Prints help for a Makefile.
 # Usual invocation (from make):
 # help:
@@ -21,6 +21,7 @@ help:
 
 Supported options:
   -h, --help    Print this help text.
+  -v, --version Print version information.
 
 $0 prints the documentation of variables and goals.
 A documentation comment is recognized as one or more comment lines right before a goal or variable definition,
@@ -45,6 +46,16 @@ Example:
 Report bugs to cher\@riedquat.de.
 END
     exit 0;
+} elsif ($ARGV[0] =~ /^-(v|-?version)$/) {
+    print <<END;
+makehelp.pl 1.0
+(c) 2011 Christian Hujer. All rights reserved.
+Licensed under GPLv3.
+See http://www.gnu.org/licenses/gpl.html for license information.
+END
+    exit 0;
+} elsif ($ARGV[0] =~ /^(-.*)$/) {
+    die "$0: Unknown command line option $1. Try $0 --help.";
 }
 
 while (<>) {
