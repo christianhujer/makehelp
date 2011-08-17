@@ -51,7 +51,7 @@ END
     exit 0;
 } elsif ($ARGV[0] =~ /^-(v|-?version)$/) {
     print <<END;
-makehelp.pl 1.0
+makehelp.pl 1.1
 (c) 2011 Christian Hujer. All rights reserved.
 Licensed under GPLv3.
 See http://www.gnu.org/licenses/gpl.html for license information.
@@ -101,20 +101,25 @@ Popular make OPTIONs:
   -q    Run no commands; exit status says if up to date.
   -h    Print make help text.
 Use option -h to lits the GNUmake part of the help.
+END
+
+my $indent = " " x 20;
+if (%vars) {
+    print <<END;
 
 A VARIABLE is specified as name=value pair.
 Supported VARIABLEs:
 END
 
-my $indent = " " x 20;
-for (sort keys %vars) {
-    $vars{$_} =~ s/^/$indent/gm;
-    if (length > 16) {
-        print "  $_\n$vars{$_}";
-    } else {
-        $tmpIndent = " " x (2 + length);
-        $vars{$_} =~ s/^$tmpIndent//;
-        print "  $_$vars{$_}";
+    for (sort keys %vars) {
+        $vars{$_} =~ s/^/$indent/gm;
+        if (length > 16) {
+            print "  $_\n$vars{$_}";
+        } else {
+            $tmpIndent = " " x (2 + length);
+            $vars{$_} =~ s/^$tmpIndent//;
+            print "  $_$vars{$_}";
+        }
     }
 }
 
