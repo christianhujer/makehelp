@@ -6,6 +6,7 @@
 #
 # To make your make inline help documentation work, start documentation comments before a target or variable with double-hash.
 # Example:
+# .PHONY: all
 # ## Compiles and linkes all sources.
 # # This is the default target.
 # all: ...
@@ -32,6 +33,7 @@ This includes the make goal.
 Note: To reference variables which are defined in the Makefile, don't forget to export them.
 
 Example:
+  .PHONY: all
   ## Performs the complete build of the project.
   # This is the default target.
   all: mybinary
@@ -39,6 +41,7 @@ Example:
   ## Flags for the C preprocessor.
   CPPFLAGS?=
 
+  .PHONY: help
   ## Prints this help text.
   help:
   	perl $0 \$(MAKEFILE_LIST)
