@@ -11,7 +11,17 @@
 # # This is the default target.
 # all: ...
 
-if ($ARGV[0] =~ /^-(h|-?help)$/) {
+$version = "1.2";
+
+sub changelog() {
+    print <<END;
+2012-11-11 1.2
+    Implement changelog option.
+
+END
+}
+
+sub help() {
     print <<END;
 Usage: perl $0 MAKEFILE...
 Prints the help text of one or more MAKEFILEs.
@@ -48,14 +58,25 @@ Example:
 
 Report bugs to cher\@riedquat.de.
 END
-    exit 0;
-} elsif ($ARGV[0] =~ /^-(v|-?version)$/) {
+}
+
+sub version() {
     print <<END;
-makehelp.pl 1.1
-(c) 2011 Christian Hujer. All rights reserved.
+makehelp.pl $version
+(c) 2011 - 2012 Christian Hujer. All rights reserved.
 Licensed under GPLv3.
 See http://www.gnu.org/licenses/gpl.html for license information.
 END
+}
+
+if ($ARGV[0] =~ /^-(h|-?help)$/) {
+    help();
+    exit 0;
+} elsif ($ARGV[0] =~ /^-(v|-?version)$/) {
+    version();
+    exit 0;
+} elsif ($ARGV[0] =~ /^-(c|-?changelog)$/) {
+    changelog();
     exit 0;
 } elsif ($ARGV[0] =~ /^(-.*)$/) {
     die "$0: Unknown command line option $1. Try $0 --help.";
