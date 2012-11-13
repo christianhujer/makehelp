@@ -7,7 +7,7 @@
 # To make your make inline help documentation work, start documentation comments before a target or variable with double-hash.
 # Example:
 # .PHONY: all
-# ## Compiles and linkes all sources.
+# ## Compiles and links all sources.
 # # This is the default target.
 # all: ...
 
@@ -121,7 +121,7 @@ Popular make OPTIONs:
   -n    Don't run the commands, just print them.
   -q    Run no commands; exit status says if up to date.
   -h    Print make help text.
-Use option -h to lits the GNUmake part of the help.
+Use option -h to lists the GNUmake part of the help.
 END
 
 my $indent = " " x 20;
