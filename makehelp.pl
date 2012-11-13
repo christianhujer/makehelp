@@ -69,14 +69,14 @@ See http://www.gnu.org/licenses/gpl.html for license information.
 END
 }
 
-if ($ARGV[0] =~ /^-(h|-?help)$/) {
+if ($ARGV[0] =~ /^-(c|-?changelog)$/) {
+    changelog();
+    exit 0;
+} elsif ($ARGV[0] =~ /^-(h|-?help)$/) {
     help();
     exit 0;
 } elsif ($ARGV[0] =~ /^-(v|-?version)$/) {
     version();
-    exit 0;
-} elsif ($ARGV[0] =~ /^-(c|-?changelog)$/) {
-    changelog();
     exit 0;
 } elsif ($ARGV[0] =~ /^(-.*)$/) {
     die "$0: Unknown command line option $1. Try $0 --help.";
