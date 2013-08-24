@@ -1,0 +1,3 @@
+## Test from OtherMakefile.
+test:
+	@echo test
