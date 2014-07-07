@@ -11,10 +11,13 @@
 # # This is the default target.
 # all: ...
 
-$version = "1.2";
+$version = "1.3";
 
 sub changelog() {
     print <<END;
+2014-07-07 1.3
+    Make the command line options more similar to glibc argp.
+
 2012-11-11 1.2
     Implement changelog option.
 
@@ -31,8 +34,10 @@ help:
 	perl $0 \$(MAKEFILE_LIST)
 
 Supported options:
-  -h, --help    Print this help text.
-  -v, --version Print version information.
+  -c, --changelog   Print the changelog.
+  -?, --help        Print this help text.
+  -h                Same as -?
+  -V, --version     Print version information.
 
 $0 prints the documentation of variables and goals.
 A documentation comment is recognized as one or more comment lines right before a goal or variable definition,
@@ -69,18 +74,14 @@ See http://www.gnu.org/licenses/gpl.html for license information.
 END
 }
 
-if ($ARGV[0] =~ /^-(c|-?changelog)$/) {
-    changelog();
-    exit 0;
-} elsif ($ARGV[0] =~ /^-(h|-?help)$/) {
-    help();
-    exit 0;
-} elsif ($ARGV[0] =~ /^-(v|-?version)$/) {
-    version();
-    exit 0;
-} elsif ($ARGV[0] =~ /^(-.*)$/) {
-    die "$0: Unknown command line option $1. Try $0 --help.";
+while ($_ = shift) {
+    /^-(c|-?changelog)$/ and changelog() and exit 0;
+    /^-(\?|h|-?help)$/ and help() and exit 0;
+    /^-(V|-?version)$/ and version() and exit 0;
+    /^(-.*)$/ and die "$0: Unknown command line option $1. Try $0 --help.";
+    push @RealArgs, $_;
 }
+@ARGV = @RealArgs;
 
 while (<>) {
     if (/^## .*$/ ... /^([^.#\t][^:=]*:([^=]|$)|([^.#\t][^:=?]*(\?=|:=|=))|$)/) {
