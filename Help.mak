@@ -6,10 +6,12 @@
 help: makehelp.pl
 	perl makehelp.pl $(MAKEFILE_LIST)
 
+ifeq "updateMakehelp" "$(filter updateMakehelp,$(MAKECMDGOALS))"
+.PHONY: makehelp.pl Help.mak
+endif
 makehelp.pl Help.mak:
 	wget -N -q --no-check-certificate https://github.com/christianhujer/makehelp/raw/master/$@
 
 .PHONY: updateMakehelp
 ## Updates makehelp.pl
-updateMakehelp:
-	$(MAKE) -B makehelp.pl Help.mak
+updateMakehelp: makehelp.pl Help.mak
