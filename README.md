@@ -46,7 +46,7 @@ help: export BINDIR:=$(value BINDIR)
 -include ../Help.mak
 ~~~~
 
-Sample output:
+Sample output of running `make help`:
 
 ~~~~
 Usage: make [OPTION|GOAL|VARIABLE]...
