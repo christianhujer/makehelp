@@ -4,7 +4,7 @@
 .PHONY: help
 ## Prints this help message.
 help: makehelp.pl
-	perl makehelp.pl $(MAKEFILE_LIST)
+	@perl makehelp.pl $(MAKEFILE_LIST)
 
 ifeq "updateMakehelp" "$(filter updateMakehelp,$(MAKECMDGOALS))"
 .PHONY: makehelp.pl Help.mak
