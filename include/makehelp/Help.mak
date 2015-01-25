@@ -1,23 +1,30 @@
-ifeq (,$(HELP.MAK))
-HELP.MAK:=$(lastword $(MAKEFILE_LIST))
+ifeq (,$(MAKEHELP/HELP.MAK))
+MAKEHELP/HELP.MAK:=$(lastword $(MAKEFILE_LIST))
 
 # File to include from your Makefile.
 # To update these files, run
 
 .PHONY: help
 ## Prints this help message.
-help: makehelp.pl
-	@makehelp.pl $(MAKEFILE_LIST)
+help:
+	@makehelp $(MAKEFILE_LIST)
 
 ifeq "updateMakehelp" "$(filter updateMakehelp,$(MAKECMDGOALS))"
-.PHONY: makehelp.pl Help.mak
+.PHONY: makehelp Help.mak
 endif
 # If -N does not work, that's because github doesn't send Last-Modified header.
-makehelp.pl Help.mak:
+makehelp Help.mak:
 	wget -N -q --no-check-certificate https://github.com/christianhujer/makehelp/raw/master/$@
 
 .PHONY: updateMakehelp
-## Updates makehelp.pl
-updateMakehelp: makehelp.pl Help.mak
+## Updates makehelp
+updateMakehelp: makehelp Help.mak
+
+ifeq "help" "$(filter help,$(MAKECMDGOALS))"
+include .help.mak
+endif
+
+.help.mak: $(MAKEFILE_LIST)
+	@makehelp -d $^ >$@
 
 endif

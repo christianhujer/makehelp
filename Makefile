@@ -1,17 +1,27 @@
+## Installation prefix.
+# Defaults to /usr/local/.
 PREFIX:=/usr/local/
+
+## Installation directory for binaries.
 BINDIR=$(PREFIX)/bin/
+
+## Installation directory for include files.
 INCDIR=$(PREFIX)/include/
 
-## Installs makehelp on your system.
-.PHONY: install
-install:
-	install -d $(INCDIR)/makehelp/ $(BINDIR)/
-	install -t $(INCDIR)/makehelp/ include/makehelp/*
-	install -t $(BINDIR)/ bin/makehelp.pl
+## Installation directory for man files.
+MANDIR=$(PREFIX)/share/man/
 
-## Removes makehelp from your system.
+.PHONY: install
+## Installs makehelp on your system.
+install:
+	install -d $(INCDIR)/makehelp/ $(BINDIR)/ $(MANDIR)/man1/
+	install -m 0644 -t $(INCDIR)/makehelp/ include/makehelp/*
+	install -t $(BINDIR)/ bin/makehelp
+	install -m 0644 -t $(MANDIR)/man1/ man/makehelp.1
+
 .PHONY: uninstall
+## Removes makehelp from your system.
 uninstall:
-	$(RM) -r $(INCDIR)/makehelp/ $(BINDIR)/makehelp.pl
+	$(RM) -r $(INCDIR)/makehelp/ $(BINDIR)/makehelp
 
 include include/makehelp/Help.mak

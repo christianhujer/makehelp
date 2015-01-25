@@ -20,7 +20,7 @@ Per default, the include files are installed in `/usr/local/include/makehelp/` a
 ### Running `makehelp` from your `Makefile`
 To run `makehelp` from your `Makefile`, simply include the following line in your `Makefile`:
 
-~~~~
+~~~~make
 include makehelp/Help.mak
 ~~~~
 
@@ -32,14 +32,14 @@ Included makefiles are supported.
 
 #### Example for a variable documentation
 
-~~~~
+~~~~make
 ## The prefix path for installation: $(PREFIX)
 PREFIX:=/usr/local/
 ~~~~
 
 #### Example for goal documentation
 
-~~~~
+~~~~make
 .PHONY: all
 ## Builds everything.
 all: hello
@@ -47,7 +47,7 @@ all: hello
 
 #### Sample Makefile
 
-~~~~
+~~~~make
 ## The prefix path for installation: $(PREFIX)
 PREFIX:=/usr/local/
 
@@ -77,7 +77,7 @@ help: export BINDIR:=$(value BINDIR)
 
 Sample output of running `make help`:
 
-~~~~
+~~~~make
 Usage: make [OPTION|GOAL|VARIABLE]...
 Runs make to make the specified GOALs.
 If no GOAL is specified, the default goal is made (usually "all").

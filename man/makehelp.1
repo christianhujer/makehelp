@@ -1,0 +1,75 @@
+.TH makehelp 1
+.SH NAME
+makehelp \- Extract and print help information from Makefiles.
+.SH SYNOPSIS
+.B makehelp
+[\fIOPTION\fR]... [\fIMAKEFILE\fR]...
+.SH DESCRIPTION
+.B makehelp
+extracts and prints help information form Makefiles by looking for documentation comment blocks in front of variables and goals.
+A documentation comment block is one or more lines of comments only of which the first line starts with "##".
+.br
+If no
+.IR MAKEFILE
+is given,
+.B makehelp
+tries to read a Makefile from
+.IR stdin .
+.SH OPTIONS
+.TP
+.BR \-c ", " \-\-changelog
+Prints the changelog and exits.
+.TP
+.BR \-d ", " \-\-vardefs
+Generates variable definition file and exits.
+.TP
+.BR \-h ", " \-\-help
+Prints this help text and exits.
+.TP
+.BR \-?
+Same as -h.
+.TP
+.BR \-V ", " \-\-version
+Prints version information and exits.
+.SH MAKEHELP COMMENT SYNTAX
+.SS Documenting Variables
+In order to document a variable, use a documentation comment before the variable declaration.
+It is common to document those variables which the user could or should override on the command line.
+
+.RS 4
+## C Compiler executable.
+.RS 0
+CC:=gcc
+.SS Documenting Goals
+In order to document a goal, use a documentation comment before the goal declaration.
+It is common to document those goals which are relevant to the user.
+
+.RS 4
+\[char46]PHONY: all
+.RS 0
+## Builds the executable.
+.RS 0
+all: main
+.SS Referencing Variables
+It is possible to reference variables in comments.
+To do so, include a variable in a comment like this: $(VARNAME).
+
+.RS 4
+## Installation path prefix.
+.RS 0
+# Current value: $(PREFIX).
+.RS 0
+PREFIX:=/usr/local/
+.SH EXIT STATUS
+The exit status is 0 if help text could be printed.
+If an error occurred, the exit status is not zero.
+.SH AUTHOR
+Written by Christian Hujer.
+.SH REPORTING BUGS
+Report bugs via <https://github.com/christianhujer/makeunit/issues>
+.SH COPYRIGHT
+Copyright © 2015 Chrsitian Hujer.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+.br
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.

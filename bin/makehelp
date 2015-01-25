@@ -2,7 +2,7 @@
 # Prints help for a Makefile.
 # Usual invocation (from make):
 # help:
-# 	perl makehelp.pl $(MAKEFILE_LIST)
+# 	perl makehelp $(MAKEFILE_LIST)
 #
 # To make your make inline help documentation work, start documentation comments before a target or variable with double-hash.
 # Example:
@@ -11,10 +11,17 @@
 # # This is the default target.
 # all: ...
 
-$version = "1.3";
+$version = "1.4";
 
 sub changelog() {
     print <<END;
+2015-01-25 1.4
+    Use Help.mak instead of direct rules.
+    Change name from makehelp.pl to makehelp.
+    Add man page.
+    Generate variable definition file which automatically exports all variables required for help.
+    Print current value of each variable.
+
 2014-07-07 1.3
     Make the command line options more similar to glibc argp.
 
@@ -38,6 +45,7 @@ Supported options:
   -?, --help        Print this help text.
   -h                Same as -?
   -V, --version     Print version information.
+  -d, --vardefs     Generate variable definition file.
 
 $0 prints the documentation of variables and goals.
 A documentation comment is recognized as one or more comment lines right before a goal or variable definition,
@@ -56,10 +64,7 @@ Example:
   ## Flags for the C preprocessor.
   CPPFLAGS?=
 
-  .PHONY: help
-  ## Prints this help text.
-  help:
-  	perl $0 \$(MAKEFILE_LIST)
+  include makehelp/Help.mak
 
 Report bugs to cher\@riedquat.de.
 END
@@ -67,8 +72,8 @@ END
 
 sub version() {
     print <<END;
-makehelp.pl $version
-(c) 2011 - 2012 Christian Hujer. All rights reserved.
+$0 $version
+(c) 2011 - 2015 Christian Hujer. All rights reserved.
 Licensed under GPLv3.
 See http://www.gnu.org/licenses/gpl.html for license information.
 END
@@ -78,6 +83,7 @@ while ($_ = shift) {
     /^-(c|-?changelog)$/ and changelog() and exit 0;
     /^-(\?|h|-?help)$/ and help() and exit 0;
     /^-(V|-?version)$/ and version() and exit 0;
+    /^-(d|-?vardefs)$/ and $vardefs = 1 and next;
     /^(-.*)$/ and die "$0: Unknown command line option $1. Try $0 --help.";
     push @RealArgs, $_;
 }
@@ -92,10 +98,13 @@ while (<>) {
         $p =~ s/(\?=|:=|=).*/=/;
         $p =~ s/:.*/:/;
         chomp $p;
+        $d{$1} = 1 while $h =~ /\$\(([^)]*)\)/g;
         $p =~ s/\$\(([^)]*)\)/$ENV{$1}/ge;
         $h =~ s/\$\(([^)]*)\)/$ENV{$1}/ge;
         if ($p =~ /=$/) {
             $p =~ s/=$//;
+            $d{$p} = 1;
+            $h.="Current value: $ENV{$p}\n";
             if ($h ne $vars{$p}) {
                 $vars{$p} .= $h;
             }
@@ -108,6 +117,11 @@ while (<>) {
         undef $h;
         undef $p;
     }
+}
+
+if ($vardefs) {
+    print "help: export $_:=\$(value $_)\n" for sort keys %d;
+    exit 0;
 }
 
 print <<END;
