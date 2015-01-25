@@ -24,4 +24,25 @@ install:
 uninstall:
 	$(RM) -r $(INCDIR)/makehelp/ $(BINDIR)/makehelp
 
+.PHONY: dist
+## Creates the distribution archives.
+dist: dist/makehelp.tar.gz dist/makehelp.tar.bz2 dist/makehelp.zip
+
+dist/makehelp.tar.gz: dist/makehelp.tar
+dist/makehelp.tar.bz2: dist/makehelp.tar
+
+%.gz: %
+	<$< gzip -9 >$@
+
+%.bz2: %
+	<$< bzip2 -9 >$@
+
+dist/makehelp.tar dist/makehelp.zip:
+	mkdir -p dist
+	git archive -o $@ --prefix makehelp/ HEAD .
+
+.PHONY: clean
+clean:
+	$(RM) -r dist
+
 include include/makehelp/Help.mak
