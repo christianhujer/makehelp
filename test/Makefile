@@ -11,4 +11,4 @@ all:
 .PHONY: help
 ## Prints this help text.
 help:
-	@perl ../makehelp.pl $(MAKEFILE_LIST)
+	@perl ../bin/makehelp.pl $(MAKEFILE_LIST)

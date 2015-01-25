@@ -1,22 +1,51 @@
 # makehelp
 
-`makehelp.pl` is a small perl script which provides built-in doxygen-style help in `Makefile`s.
+<div style="font-size: 150%; font-weight: bold; text-align: center;">! Doxygen for GNU make !</div>
+
+## What is `makehelp`?
+`makehelp.pl` is a Makefile and a Perl script which provide built-in doxygen-style help in `Makefile`s.
 Special comments in the `Makefile` are used to provide user documentation for goals and variables.
 These comments are extracted by makehelp to print a nice documentation.
 That documentation is similar to the built-in help texts of UNIX commands.
 
+
+## Installing `makehelp`
+Makehelp can run with or without installation.
+If you want to install makehelp, run `sudo make install`.
+
+Per default, the include files are installed in `/usr/local/include/makehelp/` and the binary files are installed in `/usr/local/bin/`.
+
+## Using `makehelp`.
+
+### Running `makehelp` from your `Makefile`
+To run `makehelp` from your `Makefile`, simply include the following line in your `Makefile`:
+
+~~~~
+include makehelp/Help.mak
+~~~~
+
+### Using `makehelp` in your `Makefile`
 Makehelp comments start with `##` instead of `#`.
-They should be positioned before variables or goals.
+They should be positioned before those variables or goals that you want to document.
+
 Included makefiles are supported.
 
-To use `makehelp` in your project, simply copy `Help.mak` and `makehelp.pl` to your project directory.
+#### Example for a variable documentation
 
-For an example, see directory example.
+~~~~
+## The prefix path for installation: $(PREFIX)
+PREFIX:=/usr/local/
+~~~~
 
-For more examples, see
-* https://github.com/christianhujer/sclog4c
+#### Example for goal documentation
 
-Sample Makefile:
+~~~~
+.PHONY: all
+## Builds everything.
+all: hello
+~~~~
+
+#### Sample Makefile
 
 ~~~~
 ## The prefix path for installation: $(PREFIX)
@@ -43,7 +72,7 @@ install: all
 help: export PREFIX:=$(value PREFIX)
 help: export BINDIR:=$(value BINDIR)
 
--include ../Help.mak
+-include makehelp/Help.mak
 ~~~~
 
 Sample output of running `make help`:
@@ -74,3 +103,7 @@ Supported GOALs:
   install           Installs the binary program to $(PREFIX)bin/.
                     On most systems, this needs to be run as root, i.e. using sudo.
 ~~~~
+
+For more examples, see
+* https://github.com/christianhujer/sclog4c
+

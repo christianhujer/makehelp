@@ -1,10 +1,13 @@
+ifeq (,$(HELP.MAK))
+HELP.MAK:=$(lastword $(MAKEFILE_LIST))
+
 # File to include from your Makefile.
 # To update these files, run
 
 .PHONY: help
 ## Prints this help message.
 help: makehelp.pl
-	@perl makehelp.pl $(MAKEFILE_LIST)
+	@makehelp.pl $(MAKEFILE_LIST)
 
 ifeq "updateMakehelp" "$(filter updateMakehelp,$(MAKECMDGOALS))"
 .PHONY: makehelp.pl Help.mak
@@ -16,3 +19,5 @@ makehelp.pl Help.mak:
 .PHONY: updateMakehelp
 ## Updates makehelp.pl
 updateMakehelp: makehelp.pl Help.mak
+
+endif

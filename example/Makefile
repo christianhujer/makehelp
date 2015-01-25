@@ -22,4 +22,4 @@ install: all
 help: export PREFIX:=$(value PREFIX)
 help: export BINDIR:=$(value BINDIR)
 
--include ../Help.mak
+-include ../include/makehelp/Help.mak
