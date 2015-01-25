@@ -26,7 +26,7 @@ uninstall:
 
 .PHONY: dist
 ## Creates the distribution archives.
-dist: dist/makehelp.tar.gz dist/makehelp.tar.bz2 dist/makehelp.zip
+dist: dist/makehelp.tar.gz dist/makehelp.tar.bz2 dist/makehelp.zip dist/makehelp.deb
 
 dist/makehelp.tar.gz: dist/makehelp.tar
 dist/makehelp.tar.bz2: dist/makehelp.tar
@@ -43,6 +43,25 @@ dist/makehelp.tar dist/makehelp.zip:
 
 .PHONY: clean
 clean:
-	$(RM) -r dist
+	$(RM) -r dist control data/ data.tar.gz control.tar.gz debian-binary
+
+control:
+	echo "Package: makehelp\nVersion: 1.4.0\nSection: user/hidden\nPriority: optional\nArchitecture: all\nInstalled-Size: `du -cks bin/ include/ | tail -n 1 | cut -f 1`\nMaintainer: Christian Hujer <cher@riedquat.de>\nDescription: makehelp - Extract and print help information from Makefiles." >$@
+
+control.tar.gz: control
+	tar czf $@ $^
+
+data.tar.gz: data/
+	tar czf $@ --transform 's,^\./,/,' -C $< .
+
+data/:
+	$(MAKE) PREFIX=data/usr/
+
+debian-binary:
+	mkdir -p $(dir $@)
+	echo 2.0 >$@
+
+dist/makehelp.deb: debian-binary control.tar.gz data.tar.gz
+	ar -Drc $@ $^
 
 include include/makehelp/Help.mak
