@@ -77,7 +77,7 @@ help: export BINDIR:=$(value BINDIR)
 
 Sample output of running `make help`:
 
-~~~~make
+~~~~none
 Usage: make [OPTION|GOAL|VARIABLE]...
 Runs make to make the specified GOALs.
 If no GOAL is specified, the default goal is made (usually "all").
