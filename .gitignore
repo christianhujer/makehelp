@@ -1,1 +1,7 @@
+control
+control.tar.gz
+data/
+data.tar.gz
+debian-binary
+dist/
 .help.mak
