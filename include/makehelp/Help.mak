@@ -31,7 +31,7 @@ distclean: include/makehelp/Help.mak+distclean
 include/makehelp/Help.mak+distclean:
 	$(RM) .help.mak
 
-.help.mak: $(MAKEFILE_LIST)
+.help.mak: $(filter-out .help.mak, $(MAKEFILE_LIST))
 	@makehelp -d $^ >$@
 
 endif
