@@ -24,6 +24,13 @@ ifeq "help" "$(filter help,$(MAKECMDGOALS))"
 include .help.mak
 endif
 
+.PHONY: distclean
+distclean: include/makehelp/Help.mak+distclean
+
+.PHONY: include/makehelp/Help.mak+distclean
+include/makehelp/Help.mak+distclean:
+	$(RM) .help.mak
+
 .help.mak: $(MAKEFILE_LIST)
 	@makehelp -d $^ >$@
 
