@@ -1,7 +1,7 @@
-## The prefix path for installation: $(PREFIX)
+## The prefix path for installation.
 PREFIX:=/usr/local/
 
-## The path to install binary files: $(BINDIR)
+## The path to install binary files.
 BINDIR=$(PREFIX)bin/
 
 .PHONY: all
@@ -18,8 +18,5 @@ clean:
 # On most systems, this needs to be run as root, i.e. using sudo.
 install: all
 	install -d $(BINDIR) hello
-
-help: export PREFIX:=$(value PREFIX)
-help: export BINDIR:=$(value BINDIR)
 
 -include ../include/makehelp/Help.mak
