@@ -21,7 +21,7 @@ Per default, the include files are installed in `/usr/local/include/makehelp/` a
 To run `makehelp` from your `Makefile`, simply include the following line in your `Makefile`:
 
 ~~~~make
-include makehelp/Help.mak
+-include makehelp/Help.mak
 ~~~~
 
 ### Using `makehelp` in your `Makefile`
@@ -68,9 +68,6 @@ clean:
 # On most systems, this needs to be run as root, i.e. using sudo.
 install: all
 	install -d $(BINDIR) hello
-
-help: export PREFIX:=$(value PREFIX)
-help: export BINDIR:=$(value BINDIR)
 
 -include makehelp/Help.mak
 ~~~~
