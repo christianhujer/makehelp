@@ -1,6 +1,6 @@
 # makehelp
 
-<div style="font-size: 150%; font-weight: bold; text-align: center;">! Doxygen for GNU make !</div>
+<div style="font-size: 150%; font-weight: bold; text-align: center;">! Doxygen (sort of) for GNU make !</div>
 
 ## What is `makehelp`?
 `makehelp.pl` is a Makefile and a Perl script which provide built-in doxygen-style help in `Makefile`s.
