@@ -37,7 +37,8 @@ Included makefiles are supported.
 #### Example for a variable documentation
 
 ~~~~make
-## The prefix path for installation: $(PREFIX)
+## The prefix path for installation.
+# Unless overridden individually, other installation paths are derived from this.
 PREFIX:=/usr/local/
 ~~~~
 
@@ -52,10 +53,11 @@ all: hello
 #### Sample Makefile
 
 ~~~~make
-## The prefix path for installation: $(PREFIX)
+## The prefix path for installation.
+# Unless overridden individually, other installation paths are derived from this.
 PREFIX:=/usr/local/
 
-## The path to install binary files: $(BINDIR)
+## The path to install binary files.
 BINDIR=$(PREFIX)bin/
 
 .PHONY: all
@@ -94,8 +96,11 @@ Use option -h to lists the GNUmake part of the help.
 
 A VARIABLE is specified as name=value pair.
 Supported VARIABLEs:
-  BINDIR            The path to install binary files: $(PREFIX)bin/
-  PREFIX            The prefix path for installation: /usr/local/
+  BINDIR            The path to install binary files.
+                    Current value: $(PREFIX)bin/
+  PREFIX            The prefix path for installation.
+                    Unless overridden individually, other installation paths are derived from this.
+                    Current value: /usr/local/
 
 Supported GOALs:
   all               Builds everything.
