@@ -58,7 +58,6 @@ data/:
 	$(MAKE) PREFIX=data/usr/
 
 debian-binary:
-	mkdir -p $(dir $@)
 	echo 2.0 >$@
 
 dist/makehelp.deb: debian-binary control.tar.gz data.tar.gz
