@@ -26,6 +26,8 @@ To run `makehelp` from your `Makefile`, simply include the following line in you
 
 The best position to include this is at the **end** of your `Makefile`.
 
+If you are including other Makefiles and do not want to export the help they provide, include those Makefiles after `makehelp/Help.mak`, not before.
+
 ### Using `makehelp` in your `Makefile`
 Makehelp comments start with `##` instead of `#`.
 They should be positioned before those variables or goals that you want to document.
