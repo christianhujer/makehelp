@@ -1,4 +1,4 @@
-ifeq (,$(MAKEHELP/HELP.MAK))
+ifeq (undefined,$(origin MAKEHELP/HELP.MAK))
 MAKEHELP/HELP.MAK:=$(lastword $(MAKEFILE_LIST))
 
 # File to include from your Makefile like this:
