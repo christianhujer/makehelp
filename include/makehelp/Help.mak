@@ -15,10 +15,7 @@ include .help.mak
 endif
 
 .PHONY: distclean
-distclean: include/makehelp/Help.mak+distclean
-
-.PHONY: include/makehelp/Help.mak+distclean
-include/makehelp/Help.mak+distclean:
+distclean::
 	$(RM) .help.mak
 
 .help.mak: $(filter-out .help.mak, $(MAKEFILE_LIST))
