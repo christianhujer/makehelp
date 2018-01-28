@@ -12,12 +12,12 @@ That documentation is similar to the built-in help texts of UNIX commands.
 To use `makehelp` in your project without installing it, append the following lines to your `Makefile`:
 
 ~~~~make
-ifeq "help" "$(filter help,$(MAKECMDGOALS))"
 -include .makehelp/include/makehelp/Help.mak
-endif
 
+ifeq "help" "$(filter help,$(MAKECMDGOALS))"
 .makehelp/include/makehelp/Help.mak:
 	git clone --depth=1 https://github.com/christianhujer/makehelp.git .makehelp
+endif
 ~~~~
 
 And add the following lines to your `.gitignore`:
