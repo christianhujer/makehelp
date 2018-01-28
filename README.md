@@ -8,6 +8,23 @@ Special comments in the `Makefile` are used to provide user documentation for go
 These comments are extracted by makehelp to print a nice documentation.
 That documentation is similar to the built-in help texts of UNIX commands.
 
+## Using `makehelp` without Installation
+To use `makehelp` in your project without installing it, append the following lines to your `Makefile`:
+
+~~~~make
+-include .makehelp/include/makehelp/Help.mak
+
+.makehelp/include/makehelp/Help.mak:
+	git clone --depth=1 https://github.com/christianhujer/makehelp.git .makehelp
+~~~~
+
+And add the following lines to your `.gitignore`:
+
+~~~~.gitignore
+.makehelp
+.help.mak
+~~~~
+
 
 ## Installing `makehelp`
 Makehelp can run with or without installation.
