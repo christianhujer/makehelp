@@ -1,5 +1,6 @@
 ifeq (undefined,$(origin MAKEHELP/HELP.MAK))
 MAKEHELP/HELP.MAK:=$(lastword $(MAKEFILE_LIST))
+MAKEHELP:=$(firstword $(wildcard $(firstword $(dir $(lastword $(MAKEFILE_LIST)))/../../bin/makehelp)) makehelp)
 
 # File to include from your Makefile like this:
 # -include makehelp/Help.mak
@@ -7,7 +8,7 @@ MAKEHELP/HELP.MAK:=$(lastword $(MAKEFILE_LIST))
 .PHONY: help
 ## Prints this help message.
 help:
-	@makehelp $(MAKEFILE_LIST)
+	@$(MAKEHELP) $(MAKEFILE_LIST)
 
 ifeq "help" "$(filter help,$(MAKECMDGOALS))"
 include .help.mak
@@ -21,6 +22,6 @@ include/makehelp/Help.mak+distclean:
 	$(RM) .help.mak
 
 .help.mak: $(filter-out .help.mak, $(MAKEFILE_LIST))
-	@makehelp -d $^ >$@
+	@$(MAKEHELP) -d $^ >$@
 
 endif
