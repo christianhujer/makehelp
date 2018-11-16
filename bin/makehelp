@@ -11,10 +11,14 @@
 # # This is the default target.
 # all: ...
 
-$version = "1.4";
+$version = "1.5";
 
 sub changelog() {
     print <<END;
+2018-11-16 1.5
+    Use file suffix .mk instead of .mak for compatibility with the Makefile support plugin for IntelliJ IDEA.
+    Auto-detect the location from the Makefile list.
+
 2015-01-25 1.4
     Use Help.mak instead of direct rules.
     Change name from makehelp.pl to makehelp.
@@ -64,7 +68,7 @@ Example:
   ## Flags for the C preprocessor.
   CPPFLAGS?=
 
-  include makehelp/Help.mak
+  include makehelp/Help.mk
 
 Report bugs to cher\@riedquat.de.
 END

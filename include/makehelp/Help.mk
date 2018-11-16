@@ -3,7 +3,7 @@ MAKEHELP/HELP.MAK:=$(lastword $(MAKEFILE_LIST))
 MAKEHELP:=$(firstword $(wildcard $(firstword $(dir $(lastword $(MAKEFILE_LIST)))/../../bin/makehelp)) makehelp)
 
 # File to include from your Makefile like this:
-# -include makehelp/Help.mak
+# -include makehelp/Help.mk
 
 .PHONY: help
 ## Prints this help message.
@@ -11,14 +11,14 @@ help:
 	@$(MAKEHELP) $(MAKEFILE_LIST)
 
 ifeq "help" "$(filter help,$(MAKECMDGOALS))"
-include .help.mak
+include .help.mk
 endif
 
 .PHONY: distclean
 distclean::
-	$(RM) .help.mak
+	$(RM) .help.mk
 
-.help.mak: $(filter-out .help.mak, $(MAKEFILE_LIST))
+.help.mk: $(filter-out .help.mk, $(MAKEFILE_LIST))
 	@$(MAKEHELP) -d $^ >$@
 
 endif

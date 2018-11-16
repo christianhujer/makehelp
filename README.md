@@ -12,10 +12,10 @@ That documentation is similar to the built-in help texts of UNIX commands.
 To use `makehelp` in your project without installing it, append the following lines to your `Makefile`:
 
 ~~~~make
--include .makehelp/include/makehelp/Help.mak
+-include .makehelp/include/makehelp/Help.mk
 
 ifeq "help" "$(filter help,$(MAKECMDGOALS))"
-.makehelp/include/makehelp/Help.mak:
+.makehelp/include/makehelp/Help.mk:
 	git clone --depth=1 https://github.com/christianhujer/makehelp.git .makehelp
 endif
 ~~~~
@@ -24,7 +24,7 @@ And add the following lines to your `.gitignore`:
 
 ~~~~.gitignore
 .makehelp
-.help.mak
+.help.mk
 ~~~~
 
 
@@ -40,12 +40,12 @@ Per default, the include files are installed in `/usr/local/include/makehelp/` a
 To run `makehelp` from your `Makefile`, simply include the following line in your `Makefile`:
 
 ~~~~make
--include makehelp/Help.mak
+-include makehelp/Help.mk
 ~~~~
 
 The best position to include this is at the **end** of your `Makefile`.
 
-If you are including other Makefiles and do not want to export the help they provide, include those Makefiles after `makehelp/Help.mak`, not before.
+If you are including other Makefiles and do not want to export the help they provide, include those Makefiles after `makehelp/Help.mk`, not before.
 
 ### Using `makehelp` in your `Makefile`
 Makehelp comments start with `##` instead of `#`.
@@ -94,7 +94,7 @@ clean::
 install: all
 	install -d $(BINDIR) hello
 
--include makehelp/Help.mak
+-include makehelp/Help.mk
 ~~~~
 
 Sample output of running `make help`:

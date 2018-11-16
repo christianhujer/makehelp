@@ -4,4 +4,4 @@ data/
 data.tar.gz
 debian-binary
 dist/
-.help.mak
+.help.mk

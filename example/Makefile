@@ -19,4 +19,4 @@ clean:
 install: all
 	install -d $(BINDIR) hello
 
--include ../include/makehelp/Help.mak
+-include ../include/makehelp/Help.mk

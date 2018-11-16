@@ -27,5 +27,5 @@ uninstall:
 control.Description:=makehelp - Extract and print help information from Makefiles.
 control.Version:=1.4.0
 
--include makedist/MakeDist.mak
-include include/makehelp/Help.mak
+-include makedist/MakeDist.mk
+include include/makehelp/Help.mk
