@@ -99,6 +99,7 @@ while (<>) {
         $h .= $p;
         $p = $_;
     } elsif ($h) {
+        $p =~ s/^export //;
         $p =~ s/(\?=|:=|=).*/=/;
         $p =~ s/:.*/:/;
         chomp $p;
@@ -124,7 +125,7 @@ while (<>) {
 }
 
 if ($vardefs) {
-    print "help: export $_:=\$(value $_)\n" for sort keys %d;
+    /^export / or print "help: export $_:=\$(value $_)\n" for sort keys %d;
     exit 0;
 }
 

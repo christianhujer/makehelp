@@ -1,0 +1,40 @@
+make[1]: Entering directory '/home/christian.hujer/git/christianhujer/makehelp/test/Variables'
+Usage: make [OPTION|GOAL|VARIABLE]...
+Runs make to make the specified GOALs.
+If no GOAL is specified, the default goal is made (usually "all").
+
+Popular make OPTIONs:
+  -s    Silent mode, disables command echo.
+  -k    Keep going, continues after errors.
+  -j N  Run N jobs in parallel.
+  -n    Don't run the commands, just print them.
+  -q    Run no commands; exit status says if up to date.
+  -h    Print make help text.
+Use option -h to lists the GNUmake part of the help.
+
+A VARIABLE is specified as name=value pair.
+Supported VARIABLEs:
+  EXPORTED_CONDITIONAL_DEFINED
+                    Exported conditional defined variable.
+                    Current value: exported conditional defined
+  EXPORTED_EXPANDED
+                    Exported recursively expanded variable.
+                    Current value: exported expanded
+  EXPORTED_SIMPLE   Exported simple variable.
+                    Current value: exported simple
+  UNEXPORTED_CONDITIONAL_DEFINED
+                    Unexported conditional defined variable.
+                    Current value: unexported conditional defined
+  UNEXPORTED_EXPANDED
+                    Unexported recursively expanded variable.
+                    Current value: unexported expanded
+  UNEXPORTED_SIMPLE
+                    Unexported simple variable.
+                    Current value: unexported simple
+
+Supported GOALs:
+  help              Prints this help message.
+  test              Runs this Makefile as a test.
+                    This Makefile tests that all flavors of variables are properly expanded in the help text.
+                    This requires that unexported variables are exported for the help: make goal.
+make[1]: Leaving directory '/home/christian.hujer/git/christianhujer/makehelp/test/Variables'

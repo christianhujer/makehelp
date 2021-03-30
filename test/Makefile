@@ -8,7 +8,4 @@ FOO:=foo
 all:
 	echo all
 
-.PHONY: help
-## Prints this help text.
-help:
-	@perl ../bin/makehelp.pl $(MAKEFILE_LIST)
+-include ../include/makehelp/Help.mk
