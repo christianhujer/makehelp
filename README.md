@@ -137,6 +137,9 @@ While `makehelp` is designed to be lightweight, some might consider it still "to
 If you believe that `makehelp` is still too heavy, you could try using `sed` instead, like this:
 
 ~~~~make
+## My little Makefile
+##
+
 .PHONY: all
 ## all: Builds the hello, world application.
 all: hello
@@ -150,13 +153,20 @@ clean::
 ## help: Prints this help text.
 help:
 	sed -n 's/^## \?//p' $(MAKEFILE_LIST)
+
+##
+## Questions? Send an email to <…@…>
 ~~~~
 
-This would produce the following output:
+This would, running `make help`, produce the following output:
 ~~~~none
+My little Makefile
+
 all: Builds the hello, world application.
 clean: Removes all auto-generated files.
 help: Prints this help text.
+
+Questions? Send an email to <…@…>
 ~~~~
 
 Have fun!
