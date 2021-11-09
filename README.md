@@ -132,3 +132,31 @@ Supported GOALs:
 For more examples, see
 * https://github.com/christianhujer/sclog4c
 
+## Too "heavy"?
+While `makehelp` is designed to be lightweight, some might consider it still "too heavy".
+If you believe that `makehelp` is still too heavy, you could try using `sed` instead, like this:
+
+~~~~make
+.PHONY: all
+## all: Builds the hello, world application.
+all: hello
+
+.PHONY: clean
+## clean: Removes all auto-generated files.
+clean::
+	$(RM) hello *.[adios]
+
+.PHONY: help
+## help: Prints this help text.
+help:
+	sed -n 's/^## \?//p' $(MAKEFILE_LIST)
+~~~~
+
+This would produce the following output:
+~~~~none
+all: Builds the hello, world application.
+clean: Removes all auto-generated files.
+help: Prints this help text.
+~~~~
+
+Have fun!
