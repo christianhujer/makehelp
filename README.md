@@ -2,11 +2,30 @@
 
 <div style="font-size: 150%; font-weight: bold; text-align: center;">! Doxygen (sort of) for GNU make !</div>
 
+## TL;DR
+This is all you need!
+~~~~make
+.PHONY: help
+## help: Prints this help text.
+help:
+	@sed -En 's/^## ?//p' $(MAKEFILE_LIST)
+~~~~
+
 ## What is `makehelp`?
 `makehelp.pl` is a Makefile and a Perl script which provide built-in doxygen-style help in `Makefile`s.
 Special comments in the `Makefile` are used to provide user documentation for goals and variables.
 These comments are extracted by makehelp to print a nice documentation.
 That documentation is similar to the built-in help texts of UNIX commands.
+
+However, as you've seen above, you might get away with less.
+For most projects, the `@sed`-based `help` command should be sufficient.
+
+Only for very large projects, `makehelp` is useful.
+There, it provides:
+* goal documentation
+* variable documentation
+* separate variables section
+* goal and variable section alphabetically sorted
 
 ## Using `makehelp` without Installation
 To use `makehelp` in your project without installing it, append the following lines to your `Makefile`:
@@ -152,7 +171,7 @@ clean::
 .PHONY: help
 ## help: Prints this help text.
 help:
-	sed -n 's/^## \?//p' $(MAKEFILE_LIST)
+	sed -En 's/^## ?//p' $(MAKEFILE_LIST)
 
 ##
 ## Questions? Send an email to <…@…>
